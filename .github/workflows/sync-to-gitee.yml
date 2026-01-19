@@ -37,10 +37,6 @@ jobs:
           git push origin main
       
       - name: 推送到 Gitee
-        uses: wearerequired/git-mirror-action@master
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
-        with:
-          source-repo: "https://github.com/${{ github.repository }}.git"
-          destination-repo: "git@gitee.com:zhuxing5656/hextra-ai-insight-daily.git"
-
+        run: |
+          git remote add gitee https://zhuxing5656:${{ secrets.GITEE_TOKEN }}@gitee.com/zhuxing5656/hextra-ai-insight-daily.git || true
+          git push gitee main:main --force
